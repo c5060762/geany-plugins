@@ -525,17 +525,20 @@ void on_debug_step_into(G_GNUC_UNUSED const MenuItem *menu_item)
 {
 	debug_send_thread(thread_state == THREAD_AT_SOURCE ? "-exec-step"
 		: "-exec-step-instruction");
+	debug_send_format(F, "0%c%c%s%s-stack-list-variables 1", '2', FRAME_ARGS); //c5060762 addition from 3 years ago, it updates the local variables window content
 }
 
 void on_debug_step_over(G_GNUC_UNUSED const MenuItem *menu_item)
 {
 	debug_send_thread(thread_state == THREAD_AT_SOURCE ? "-exec-next"
 		: "-exec-next-instruction");
+	debug_send_format(F, "0%c%c%s%s-stack-list-variables 1", '2', FRAME_ARGS); //c5060762 addition from 3 years ago, it updates the local variables window content
 }
 
 void on_debug_step_out(G_GNUC_UNUSED const MenuItem *menu_item)
 {
 	debug_send_thread("-exec-finish");
+	debug_send_format(F, "0%c%c%s%s-stack-list-variables 1", '2', FRAME_ARGS); //c5060762 addition from 3 years ago, it updates the local variables window content
 }
 
 void on_debug_terminate(const MenuItem *menu_item)
